@@ -72,14 +72,6 @@
      </extensions>
    </build>
 
-   <distributionManagement>
-     <repository>
-       <id>maven.ianduffy.ie</id>
-       <name>maven.ianduffy.ie</name>
-       <url>git:gh-pages://git@github.com:imduffy15/maven.ianduffy.ie.git</url>
-     </repository>
-   </distributionManagement>
-
    <repositories>
       <repository>
          <id>jboss</id>
@@ -89,5 +81,13 @@
          </snapshots>
       </repository>
    </repositories>
+
+   <distributionManagement>
+     <repository>
+       <id>maven.ianduffy.ie</id>
+       <name>maven.ianduffy.ie</name>
+       <url>git:gh-pages://git@github.com:imduffy15/maven.ianduffy.ie.git</url>
+     </repository>
+   </distributionManagement>
 
 </project>
