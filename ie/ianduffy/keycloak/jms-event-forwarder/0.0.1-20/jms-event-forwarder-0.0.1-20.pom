@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>ie.ianduffy.keycloak</groupId>
+   <artifactId>jms-event-forwarder</artifactId>
+   <version>0.0.1-20</version>
+
+   <url>${deployment.url}</url>
+
+   <properties>
+      <jboss-jms-spec.version>1.0.0.Final</jboss-jms-spec.version>
+      <keycloak.version>4.8.3.Final</keycloak.version>
+      <lombok.version>1.18.4</lombok.version>
+
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+      <deployment.url>git:gh-pages://git@github.com:imduffy15/maven.ianduffy.ie.git</deployment.url>
+   </properties>
+
+   <dependencies>
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <version>${lombok.version}</version>
+         <optional>true</optional>
+      </dependency>
+
+      <dependency>
+         <groupId>org.keycloak</groupId>
+         <artifactId>keycloak-server-spi-private</artifactId>
+         <version>${keycloak.version}</version>
+         <scope>provided</scope>
+      </dependency>
+
+    <dependency>
+         <groupId>org.keycloak</groupId>
+         <artifactId>keycloak-server-spi</artifactId>
+         <version>${keycloak.version}</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.keycloak</groupId>
+         <artifactId>keycloak-services</artifactId>
+         <version>${keycloak.version}</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.spec.javax.jms</groupId>
+         <artifactId>jboss-jms-api_2.0_spec</artifactId>
+         <version>${jboss-jms-spec.version}</version>
+         <scope>provided</scope>
+      </dependency>
+   </dependencies>
+
+   <pluginRepositories>
+      <pluginRepository>
+       <id>synergian-repo</id>
+       <url>https://raw.github.com/synergian/wagon-git/releases</url>
+      </pluginRepository>
+   </pluginRepositories>
+
+   <build>
+     <extensions>
+       <extension>
+         <groupId>ar.com.synergian</groupId>
+         <artifactId>wagon-git</artifactId>
+         <version>0.2.5</version>
+       </extension>
+     </extensions>
+   </build>
+
+   <repositories>
+      <repository>
+         <id>jboss</id>
+         <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+         <snapshots>
+            <enabled>false</enabled>
+         </snapshots>
+      </repository>
+   </repositories>
+
+   <distributionManagement>
+     <repository>
+       <id>maven.ianduffy.ie</id>
+       <name>maven.ianduffy.ie</name>
+       <url>${deployment.url}</url>
+     </repository>
+   </distributionManagement>
+
+  <profiles>
+    <profile>
+      <id>ci</id>
+      <activation>
+        <property>
+          <name>env.GITHUB_API_KEY</name>
+        </property>
+      </activation>
+      <properties>
+         <deployment.url>git:gh-pages://https://${env.GITHUB_API_KEY}@github.com/imduffy15/maven.ianduffy.ie.git</deployment.url>
+      </properties>
+    </profile>
+  </profiles>
+
+
+</project>
